@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Element Observer</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <script src="../lib/element.js"></script>
+    <script src="../lib/event-dispatcher.js"></script>
+    <script src="../lib/observer.js"></script>
+    <script src="../lib/observer-data.js"></script>
+    <script src="../lib/query.js"></script>
+    <script src="../lib/utils.js"></script>
+    <script src="../index.js"></script>
+</head>
+<body>
+<div id="mocha"></div>
+<script src="../node_modules/chai/chai.js"></script>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script>mocha.setup('bdd')</script>
+<script src="utils.js"></script>
+<script src="test.change.js"></script>
+<script src="test.find.js"></script>
+<script src="test.added.js"></script>
+<script src="test.removed.js"></script>
+<script src="test.attribute.js"></script>
+<script>
+    mocha.checkLeaks();
+    mocha.run();
+</script>
+</body>
+</html>

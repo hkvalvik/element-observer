@@ -1,0 +1,14 @@
+{
+  "name": "elementObserver",
+  "version": "0.1.0",
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-watch": "~4.2.4",
+    "gulp-uglify": "~1.2.0",
+    "gulp-concat": "~2.5.2",
+    "gulp-wrap": "~0.11.0",
+    "mocha": "~2.2.5",
+    "chai": "~2.3.0"
+  },
+  "dependencies": {}
+}

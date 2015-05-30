@@ -1,0 +1,10 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.element-container > * {
+    border-bottom: solid 1px #ccc;
+    padding: 5px;
+}
