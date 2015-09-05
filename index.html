@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="dist/index.css">
+</head>
+<body>
+<nav class="nav-primary">
+    <ul>
+        <li class="nav-primary-home"><a href="/">Home</a></li>
+        <li><a href="/components">Components</a></li>
+        <li><a href="/element-query">Element Queries</a></li>
+        <li><a href="/element-observer">Element Observer</a></li>
+        <li><a href="/sass-bricks">Sass bricks</a></li>
+    </ul>
+</nav>
+<header class="header-primary">
+    <nav class="nav-secondary">
+        <span class="eo-logo">EO</span>
+        <ul>
+            <li><a href="/element-observer/test/test.html">Tests</a></li>
+            <li><a href="/">GitHub</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+
+<pre>
+Observer
+↓                ↓
+window.resize    MutationObserver events
+________________________________________
+↓
+Query
+↓
+elementObserver
+↓
+elementList
+
+
+</pre>
+
+</main>
+
+</body>
+</html>

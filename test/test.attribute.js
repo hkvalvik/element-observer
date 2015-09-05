@@ -9,8 +9,7 @@ describe('Attribute', function(){
         );
         document.querySelector('.purple').setAttribute('data-test', 'hello');
         elementObserver('body .purple').attribute('data-test', function(elements){
-            //throw new Error('Did not expect any elements');
-            console.error('Did not expect any elements');
+            console.error('Attribute: Did not expect any elements');
         });
         done();
     })
@@ -82,6 +81,32 @@ describe('Attribute', function(){
             document.querySelector('.cyan-1').setAttribute('data-test-1', 'hello');
             document.querySelector('.cyan-2').setAttribute('data-test-2', 'world');
         }, 1);
+    })
+
+    it('should update the query when the selector becomes active', function(done){
+
+        // Initially, the element misses the .pink-parent2 class
+        Utils.append(
+            'body',
+            '<div class="pink-parent"><div class="pink-child"></div></div>'
+        );
+
+        // The provided selector does not yet exist
+        elementObserver('.pink-parent.pink-parent2 .pink-child').changed(['clientHeight'], function(changes){
+            console.log(changes)
+            assert.equal(changes[0].items[0].value, 123);
+            done();
+        });
+
+        // Now, the selector passed to elementObserver becomes active
+        setTimeout(function(){
+            document.querySelector('.pink-parent').setAttribute('class', 'pink-parent pink-parent2');
+        }, 1);
+
+        // And now, it should detect the height change
+        setTimeout(function(){
+            document.querySelector('.pink-child').style.height = 123;
+        }, 2);
     })
 
 })

@@ -24,8 +24,8 @@ describe('Removed', function(){
         );
         elementObserver('body .blue-sync').removed(function(elements){
             assert.equal(elements.length, 2);
-            assert.equal(elements[0].getAttribute('class'), 'blue-sync blue-sync-2');
-            assert.equal(elements[1].getAttribute('class'), 'blue-sync blue-sync-1');
+            assert.equal(elements[0].getAttribute('class'), 'blue-sync blue-sync-1');
+            assert.equal(elements[1].getAttribute('class'), 'blue-sync blue-sync-2');
             done();
         });
         Utils.remove('[data-element-container]', '.blue-sync-1');
@@ -41,8 +41,8 @@ describe('Removed', function(){
         );
         elementObserver('body .blue-async').removed(function(elements){
             assert.equal(elements.length, 2);
-            assert.equal(elements[0].getAttribute('class'), 'blue-async blue-async-2');
-            assert.equal(elements[1].getAttribute('class'), 'blue-async blue-async-1');
+            assert.equal(elements[0].getAttribute('class'), 'blue-async blue-async-1');
+            assert.equal(elements[1].getAttribute('class'), 'blue-async blue-async-2');
             done();
         });
         setTimeout(function(){

@@ -1,6 +1,8 @@
 # Element Observer
 
-Observe elements
+Observe elements in the dom.
+
+Get notified when elements are added / removed / changed.
 
 ## Examples
 
@@ -12,7 +14,7 @@ Observe elements
 		console.log(elements);
 	});
 
-	// Then add element(s)
+	// Add element(s)
 	
 	var element = document.createElement('div');
 	element.className = 'my-selector';
@@ -26,12 +28,12 @@ Observe elements
 		console.log(elements);
 	});
 
-	// Then remove element(s)
+	// Remove element(s)
 	
 	var element = document.querySelector('.my-selector');
 	document.body.removeChild(element);
 
-### Get existing elements
+### Find existing elements
 
 	// Add element(s)
 	
@@ -39,13 +41,17 @@ Observe elements
 	element.className = 'my-selector';
 	document.body.appendChild(element);
 	
-	// Observe
+	// Find
 	
 	elementObserver('.my-selector').find(function(elements){
 		console.log(elements);
 	});
 
-### Behind the scenes
+## Behind the scenes
 	
-* Uses [`MutationObserver`](https://developer.mozilla.org/en/docs/Web/API/MutationObserver) and [`window resize`](https://developer.mozilla.org/en-US/docs/Web/Events/resize) to track changes to the DOM.
+Uses
+[`MutationObserver`](https://developer.mozilla.org/en/docs/Web/API/MutationObserver)
+and
+[`window resize`](https://developer.mozilla.org/en-US/docs/Web/Events/resize)
+to track changes to the DOM.
 

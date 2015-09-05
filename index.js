@@ -1,27 +1,25 @@
+// Create an observer
 
-// Create an observer that updates queries every time a DOM change occurs.
+var observer = new Observer();
 
-var observer = new Observer(function(mutations){
-    Query.queries.forEach(updateQuery.bind(this, mutations));
-});
+// Start listening for observer events
 
-function updateQuery(mutations, query){
-    query.update(mutations);
-}
+observer.connect();
 
 // Public API
 
 /**
- * @param {String} selector
- * @returns {Object}
+ * @param {String} selector A selector that will be passed on to document.querySelectorAll
+ * @returns {Object} Chainable methods
  * @constructor
  */
 window.elementObserver = function(selector){
-    var query = Query.register(selector);
+
+    // Create a new query that uses the observer to detect changes to elements that match the query.
+
+    var query = Query.register(selector, observer);
 
     return {
-
-        // Query
 
         find: function(callback){
             callback(query.find());
@@ -29,21 +27,18 @@ window.elementObserver = function(selector){
         },
 
         added: function(callback){
-            query._updateAddedElements();
-            query.on('added', callback);
+            query.on(EventNames.ADDED, callback);
             return this;
         },
 
         removed: function(callback){
-            query._updateAddedElements();
-            query.on('removed', callback);
+            query.on(EventNames.REMOVED, callback);
             return this;
         },
 
         attribute: function(attributes, callback){
-            query._updateAddedElements(); // TODO
             query.watchAttributes(attributes);
-            query.on('attribute', function(changes){
+            query.on(EventNames.ATTRIBUTES, function(changes){
                 var filtered = changes.filter(function(change){
                     return attributes.indexOf(change.attributeName) !== -1
                 });
@@ -52,10 +47,9 @@ window.elementObserver = function(selector){
             return this;
         },
 
-        change: function(properties, callback){
-            query._updateAddedElements();
-            query.watchProperties(properties);
-            query.on('change', function(changes){
+        changed: function(properties, callback){
+            query.elementList.watchProperties(properties);
+            query.elementList.on(EventNames.CHANGED, function(changes){
                 var filtered = changes.filter(function(change){
                     for(var i=0; i<change.items.length; i++){
                         if(properties.indexOf( change.items[i].property ) !== -1){
@@ -64,6 +58,12 @@ window.elementObserver = function(selector){
                     }
                     return false;
                 });
+
+                console.log("___", filtered[0].target, filtered[0].items[0],  filtered[0].items[0].value ==  filtered[0].items[0].oldValue)
+                if(!filtered[0].target.removeAttribute){
+                    console.log("1", this.element)
+                }
+
                 filtered.length && callback(filtered);
             });
             return this;
@@ -71,7 +71,7 @@ window.elementObserver = function(selector){
     };
 };
 
-// Observer
+// Static API
 
 elementObserver.connect = observer.connect.bind(observer);
 
