@@ -59,11 +59,6 @@ window.elementObserver = function(selector){
                     return false;
                 });
 
-                console.log("___", filtered[0].target, filtered[0].items[0],  filtered[0].items[0].value ==  filtered[0].items[0].oldValue)
-                if(!filtered[0].target.removeAttribute){
-                    console.log("1", this.element)
-                }
-
                 filtered.length && callback(filtered);
             });
             return this;
